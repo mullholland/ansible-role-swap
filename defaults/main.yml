@@ -1,0 +1,18 @@
+---
+swap_file_name: "swap"  # Filename of the swapfile
+swap_file_path: "/"  # Path of the swap (Path needs an "/" at the end)
+swap_file_size: "1024"  # Size in MB
+swap_file_state: "present"  # Either "present" or "absent"
+
+# create the swapfile with:
+# - "fallocate"
+# - "dd"
+swap_create: "fallocate"
+
+# Configure swappiness
+# if variable is empty nothing will be changed on the system
+swap_swappiness: ""
+
+# swap_vfs_cache_pressure
+# if variable is empty nothing will be changed on the system
+swap_vfs_cache_pressure: ""

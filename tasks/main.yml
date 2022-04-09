@@ -1,0 +1,36 @@
+---
+- name: Set swap file path
+  ansible.builtin.set_fact:
+    swap_file_fullpath: "{{ swap_file_path }}{{ swap_file_name }}"
+
+- name: Get swap file status
+  ansible.builtin.stat:
+    path: "{{ swap_file_fullpath }}"
+  register: swap_stat
+
+- name: Show size stats
+  ansible.builtin.debug:
+    msg:
+      - "Configured size => {{ swap_file_size }}"
+      - "Current size    => {{ swap_stat.stat.size }}"
+  when: swap_stat.stat.exists
+
+
+- name: Disable swap file
+  ansible.builtin.command: swapoff {{ swap_file_fullpath }}
+  when:
+    - (swap_stat.stat.exists and swap_stat.stat.size|int != (swap_file_size|int * 1024 * 1024))
+      or (swap_stat.stat.exists and swap_file_state == "absent")
+
+- name: Delete swap file
+  ansible.builtin.file:
+    path: "{{ swap_file_fullpath }}"
+    state: absent
+  when:
+    - (swap_stat.stat.exists and swap_stat.stat.size|int != (swap_file_size|int * 1024 * 1024))
+      or swap_file_state == "absent"
+
+- name: Create swap file
+  ansible.builtin.include_tasks: "swap.yml"
+  when:
+    - swap_file_state == "present"

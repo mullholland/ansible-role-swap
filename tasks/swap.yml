@@ -1,0 +1,31 @@
+---
+- name: Include Creating / Resizing swap file task
+  ansible.builtin.include_tasks: "create_{{ swap_create }}.yml"
+
+- name: Set swap file permissions
+  ansible.builtin.file:
+    path: "{{ swap_file_fullpath }}"
+    owner: "root"
+    group: "root"
+    mode: "0600"
+
+- name: Add swap to fstab
+  ansible.posix.mount:
+    name: none
+    src: "{{ swap_file_fullpath }}"
+    fstype: "swap"
+    opts: "sw"
+    passno: 0
+    dump: 0
+    state: present
+
+- name: Making swap
+  ansible.builtin.command: mkswap {{ swap_file_fullpath }}
+  register: making_swap_output
+  changed_when: making_swap_output.rc != 0
+
+- name: Enabling swap
+  ansible.builtin.command: swapon {{ swap_file_fullpath }}
+  when:
+    - ansible_virtualization_type != "docker"
+    - ansible_virtualization_type != "containerd"
