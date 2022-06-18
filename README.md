@@ -46,6 +46,22 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
     - role: "mullholland.swap"
 ```
 
+The machine needs to be prepared in CI this is done using `molecule/default/prepare.yml`:
+```yaml
+---
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Fedora | Install util-linux for fallocate
+      ansible.builtin.package:
+        name: "util-linux"
+        state: present
+      when: ansible_distribution == "Fedora"
+```
+
 
 
 
@@ -59,12 +75,13 @@ This role has been tested on these [container images](https://hub.docker.com/u/m
 -   [debian11](https://hub.docker.com/r/mullholland/docker-molecule-debian11)
 -   [ubuntu1804](https://hub.docker.com/r/mullholland/docker-molecule-ubuntu1804)
 -   [ubuntu2004](https://hub.docker.com/r/mullholland/docker-molecule-ubuntu2004)
+-   [ubuntu2204](https://hub.docker.com/r/mullholland/docker-molecule-ubuntu2204)
 -   [centos7](https://hub.docker.com/r/mullholland/docker-molecule-centos7)
 -   [centos-stream8](https://hub.docker.com/r/mullholland/docker-molecule-centos-stream8)
 -   [centos-stream9](https://hub.docker.com/r/mullholland/docker-molecule-centos-stream9)
 -   [ubi8](https://hub.docker.com/r/mullholland/docker-molecule-ubi8)
--   [fedora34](https://hub.docker.com/r/mullholland/docker-molecule-fedora34)
 -   [fedora35](https://hub.docker.com/r/mullholland/docker-molecule-fedora35)
+-   [fedora36](https://hub.docker.com/r/mullholland/docker-molecule-fedora36)
 -   [amazonlinux](https://hub.docker.com/r/mullholland/docker-molecule-amazonlinux)
 -   [rockylinux8](https://hub.docker.com/r/mullholland/docker-molecule-rockylinux8)
 -   [almalinux8](https://hub.docker.com/r/mullholland/docker-molecule-almalinux8)
