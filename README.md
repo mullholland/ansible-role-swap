@@ -46,6 +46,22 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
     - role: "mullholland.swap"
 ```
 
+The machine needs to be prepared in CI this is done using `molecule/default/prepare.yml`:
+```yaml
+---
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Fedora | Install util-linux for fallocate
+      ansible.builtin.package:
+        name: "util-linux"
+        state: present
+      when: ansible_distribution == "Fedora"
+```
+
 
 
 

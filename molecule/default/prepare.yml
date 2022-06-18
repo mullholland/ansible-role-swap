@@ -1,0 +1,12 @@
+---
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Fedora | Install util-linux for fallocate
+      ansible.builtin.package:
+        name: "util-linux"
+        state: present
+      when: ansible_distribution == "Fedora"
