@@ -3,7 +3,7 @@ galaxy_info:
   author: Mullholland
   namespace: mullholland
   role_name: swap
-  description: description
+  description: Configure swapfile
   license: MIT
   company: none
   min_ansible_version: "2.10"
@@ -18,11 +18,9 @@ galaxy_info:
     - name: Fedora
       versions:
         - all
-
     - name: Ubuntu
       versions:
         - all
-
     - name: Debian
       versions:
         - all

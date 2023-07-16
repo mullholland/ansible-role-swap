@@ -1,6 +1,6 @@
 ---
-- name: Creating / Resizing swap file (fallocate)
+- name: create_fallocate | Creating / Resizing swap file (fallocate)
   ansible.builtin.command: |
-    fallocate -l {{ ((swap_file_size )|int * 1024 * 1024) }} {{ swap_file_fullpath }} creates={{ swap_file_fullpath }}
+    fallocate -l {{ ((swap_file_size) | int * 1024 * 1024) }} {{ swap_file_fullpath }} creates={{ swap_file_fullpath }}
   register: creating_swap_output
   changed_when: creating_swap_output.rc != 0

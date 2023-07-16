@@ -1,5 +1,5 @@
 ---
-- name: Creating / Resizing swap file (dd)
+- name: create_dd | Creating / Resizing swap file (dd)
   ansible.builtin.command: |
     dd if=/dev/zero of={{ swap_file_fullpath }} bs=1M count={{ swap_file_size | int }} creates={{ swap_file_fullpath }}
   register: creating_swap_output
