@@ -16,8 +16,12 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   hosts: all
   become: true
   gather_facts: true
-  # vars:
-  #   example_var: "value"
+
+  pre_tasks:
+    - name: show virtualization type fot Ansible role testing
+      ansible.builtin.debug:
+        msg: "{{ ansible_virtualization_type }}"
+
   roles:
     - role: "mullholland.swap"
 ```
