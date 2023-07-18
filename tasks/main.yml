@@ -15,9 +15,9 @@
       - "Current size    => {{ swap_stat.stat.size }}"
   when: swap_stat.stat.exists
 
-
 - name: Disable swap file
   ansible.builtin.command: swapoff {{ swap_file_fullpath }}
+  changed_when: false
   when:
     - (swap_stat.stat.exists and swap_stat.stat.size|int != (swap_file_size|int * 1024 * 1024))
       or (swap_stat.stat.exists and swap_file_state == "absent")
@@ -34,3 +34,10 @@
   ansible.builtin.include_tasks: "swap.yml"
   when:
     - swap_file_state == "present"
+
+- name: Configure swapiness
+  ansible.posix.sysctl:
+    name: vm.swappiness
+    value: '{{ swap_swappiness }}'
+    state: present
+  when: swap_swappiness | length > 0
