@@ -30,3 +30,4 @@
   when:
     - ansible_virtualization_type != "docker"
     - ansible_virtualization_type != "containerd"
+    - ansible_virtualization_type != "container"
