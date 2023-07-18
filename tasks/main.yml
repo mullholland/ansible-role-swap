@@ -40,4 +40,4 @@
     name: vm.swappiness
     value: '{{ swap_swappiness }}'
     state: present
-  when: swap_swappiness | lenght > 0
+  when: swap_swappiness | length > 0
