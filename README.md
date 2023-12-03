@@ -4,7 +4,7 @@ Configure swapfile
 
 |GitHub|Downloads|Version|
 |------|---------|-------|
-|[![github](https://github.com/mullholland/ansible-role-swap/actions/workflows/molecule.yml/badge.svg)](https://github.com/mullholland/ansible-role-swap/actions/workflows/molecule.yml)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/mullholland/swap)|[![Version](https://img.shields.io/github/release/mullholland/ansible-role-swap.svg)](https://github.com/mullholland/ansible-role-swap/releases/)|
+|[![github](https://github.com/mullholland/ansible-role-swap/actions/workflows/molecule.yml/badge.svg)](https://github.com/mullholland/ansible-role-swap/actions/workflows/molecule.yml)|[![downloads](https://img.shields.io/ansible/role/d/mullholland/swap)](https://galaxy.ansible.com/mullholland/swap)|[![Version](https://img.shields.io/github/release/mullholland/ansible-role-swap.svg)](https://github.com/mullholland/ansible-role-swap/releases/)|
 ## [Example Playbook](#example-playbook)
 
 This example is taken from [`molecule/default/converge.yml`](https://github.com/mullholland/ansible-role-swap/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
