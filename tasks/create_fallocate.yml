@@ -1,6 +1,16 @@
 ---
+# fallocate lives in the "util-linux" package, which some minimal images
+# (e.g. CentOS Stream 10) don't install by default even though
+# util-linux-core is present.
+- name: create_fallocate | Ensure util-linux (fallocate) is installed
+  ansible.builtin.package:
+    name: util-linux
+    state: present
+  when: ansible_os_family == "RedHat"
+
 - name: create_fallocate | Creating / Resizing swap file (fallocate)
-  ansible.builtin.command: |
-    fallocate -l {{ ((swap_file_size) | int * 1024 * 1024) }} {{ swap_file_fullpath }} creates={{ swap_file_fullpath }}
+  ansible.builtin.command:
+    cmd: "fallocate -l {{ ((swap_file_size) | int * 1024 * 1024) }} {{ swap_file_fullpath }}"
+    creates: "{{ swap_file_fullpath }}"
   register: creating_swap_output
   changed_when: creating_swap_output.rc != 0

@@ -5,4 +5,4 @@
 repository:
   description: Configure swapfile
   homepage: https://mullholland.net
-  topics: system, ansible, molecule, tox, playbook
+  topics: system, ansible, molecule, playbook
