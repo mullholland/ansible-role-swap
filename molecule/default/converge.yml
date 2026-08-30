@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  become: true
   gather_facts: true
 
   pre_tasks:
@@ -10,4 +9,4 @@
         msg: "{{ ansible_virtualization_type }}"
 
   roles:
-    - role: "ansible-role-swap"
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}"
